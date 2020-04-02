@@ -15,7 +15,8 @@ CREATE TABLE blog (
     user_id INT NOT NULL,
     FOREIGN KEY (user_id) REFERENCES users(id),
     blog_entry VARCHAR,
-    post_date DATE
+    post_date DATE,
+    title VARCHAR
 );
 
 CREATE TABLE comments (
@@ -25,5 +26,6 @@ CREATE TABLE comments (
     blog_id INT NOT NULL,
     FOREIGN KEY (blog_id) REFERENCES blog(id),
     post_date DATE
-    comment VARCHAR;
+    comment VARCHAR,
+    title VARCHAR
 );
