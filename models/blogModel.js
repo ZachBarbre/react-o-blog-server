@@ -11,7 +11,7 @@ class Blog {
     static async getBlogEntries() {
         try {
             const response = await db.any(`
-                SELECT blog.id, users.id, blog.blog_entry, 
+                SELECT blog.id, blog.blog_entry, 
                 blog.post_date, blog.title, users.username 
                 FROM blog INNER JOIN users ON blog.user_id = users.id;
                 `)
@@ -25,7 +25,7 @@ class Blog {
     static async getOneBlog(blogId) {
         try {
             const response = await db.one(`
-                SELECT blog.id, users.id, blog.blog_entry, 
+                SELECT blog.id, blog.blog_entry, 
                 blog.post_date, blog.title, users.username 
                 FROM blog INNER JOIN users ON blog.user_id = users.id 
                 WHERE blog.id = ${blogId};
@@ -40,7 +40,7 @@ class Blog {
     static async getBlogComments(blogId) {
         try {
             const response = await db.any(`
-            SELECT users.id, comment, username, post_date
+            SELECT comments.id, comment, username, post_date, title
             FROM comments INNER JOIN users ON comments.user_id = users.id 
             WHERE comments.blog_id = ${blogId}
             ORDER BY comments.id;
